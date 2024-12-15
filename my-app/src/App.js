@@ -1,29 +1,14 @@
-import logo from './logo.svg';
-import './App.css';
-
-function App() {
-  async function getAdvice(){
-    const res = await fetch('https://api.adviceslip.com/advice');
-    const data = await res.json();
-    console.log(data);
+import React from "react";
+import ReactDOM from "react-dom";
+class Car extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { band: props.band };
   }
-  return (
-
-    <div>
-      <h1><p>Hello world</p></h1>
-      <button onClick={getAdvice}>Get Advice</button>
-    </div>
-
-    // <div className="App">
-    //   <header className="App-header">
-    //     {/* <img src={logo} className="App-logo" alt="logo" />
-    //     <p>
-    //       Edit <code>src/App.js</code> and save to reload.
-    //     </p> */}
-    //     <button onclick={getAdvice}>GetAdvice</button>
-    //   </header>
-    // </div>
-   );
+  present() {
+    return "Tôi có một  ${this.state.band}";
+  }
+  render() {
+    return <h1>{this.present()}</h1>;
+  }
 }
-
-export default App;
