@@ -1,14 +1,34 @@
 import React from "react";
-import ReactDOM from "react-dom";
-class Car extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { band: props.band };
+// import ReactDOM from "react-dom";
+import { useState } from "react";
+import { useEffect } from "react";
+
+export default function App() {
+  const [advice, setAdvice] = useState("");
+  const [count, setCount] = useState(0);
+  async function getAdvice() {
+    const res = await fetch("https://api.adviceslip.com/advice");
+    const data = await res.json();
+    setAdvice(data.slip.advice);
+    setCount((c) => c + 1);
   }
-  present() {
-    return "Tôi có một  ${this.state.band}";
-  }
-  render() {
-    return <h1>{this.present()}</h1>;
-  }
+  useEffect(function () {
+    getAdvice();
+  }, []);
+
+  return (
+    <div>
+      <h1>{advice}</h1>
+      <button onClick={getAdvice}>Get Advice</button>
+      <Message count={count} />
+    </div>
+  );
+}
+
+function Message(props) {
+  return (
+    <p>
+      You have read <strong>{props.count}</strong> pieces of advice.
+    </p>
+  );
 }
