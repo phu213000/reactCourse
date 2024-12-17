@@ -142,3 +142,45 @@ function getBooks() {
 function getBook(id) {
   return data.find((d) => d.id === id);
 }
+
+// Destructuring
+const book = getBook(1);
+// const title = book.title;
+// const author = book.author;
+
+const { title, author, publicationDate, genres, hasMovieAdaptation, pages } =
+  book;
+
+// author;
+console.log(author, title, genres);
+// const primaryGenre = genres[0];
+// const secondaryGenre = genres[1];
+const [primaryGenre, ...otherGenres] = genres;
+console.log(primaryGenre, otherGenres);
+
+const newGenres = ["epic fanasty", ...genres];
+newGenres;
+
+const upDateBook = {
+  // Adding a new property to the object
+  ...book,
+  // Overwriting an existing property
+  moviePublication: "2024-12-17",
+  pages: 1500,
+};
+upDateBook;
+
+// Template literals
+
+const summary = `${title},  a ${pages}-pages long book , was written by ${author} and published on ${getYear(
+  publicationDate
+)}. The book has ${hasMovieAdaptation ? "" : "not"} been adapted into a movie.`;
+summary;
+
+const pagesRange = pages > 1000 ? "Over 1000 pages" : "Less than 1000 pages";
+pagesRange;
+
+function getYear(str) {
+  return str.split("-")[0];
+}
+console.log(getYear(publicationDate));
