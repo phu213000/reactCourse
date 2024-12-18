@@ -143,44 +143,116 @@ function getBook(id) {
   return data.find((d) => d.id === id);
 }
 
-// Destructuring
-const book = getBook(1);
-// const title = book.title;
-// const author = book.author;
+// // Destructuring
+// const book = getBook(2);
+// // const title = book.title;
+// // const author = book.author;
 
-const { title, author, publicationDate, genres, hasMovieAdaptation, pages } =
-  book;
+// const { title, author, publicationDate, genres, hasMovieAdaptation, pages } =
+//   book;
 
-// author;
-console.log(author, title, genres);
-// const primaryGenre = genres[0];
-// const secondaryGenre = genres[1];
-const [primaryGenre, ...otherGenres] = genres;
-console.log(primaryGenre, otherGenres);
+// // author;
+// console.log(author, title, genres);
+// // const primaryGenre = genres[0];
+// // const secondaryGenre = genres[1];
+// const [primaryGenre, ...otherGenres] = genres;
+// console.log(primaryGenre, otherGenres);
 
-const newGenres = ["epic fanasty", ...genres];
-newGenres;
+// const newGenres = ["epic fanasty", ...genres];
+// newGenres;
 
-const upDateBook = {
-  // Adding a new property to the object
-  ...book,
-  // Overwriting an existing property
-  moviePublication: "2024-12-17",
-  pages: 1500,
-};
-upDateBook;
+// const upDateBook = {
+//   // Adding a new property to the object
+//   ...book,
+//   // Overwriting an existing property
+//   moviePublication: "2024-12-17",
+//   pages: 1500,
+// };
+// upDateBook;
 
-// Template literals
+// // Template literals
 
-const summary = `${title},  a ${pages}-pages long book , was written by ${author} and published on ${getYear(
-  publicationDate
-)}. The book has ${hasMovieAdaptation ? "" : "not"} been adapted into a movie.`;
-summary;
+// const summary = `${title},  a ${pages}-pages long book , was written by ${author} and published on ${getYear(
+//   publicationDate
+// )}. The book has ${hasMovieAdaptation ? "" : "not"} been adapted into a movie.`;
+// summary;
 
-const pagesRange = pages > 1000 ? "Over 1000 pages" : "Less than 1000 pages";
-pagesRange;
+// const pagesRange = pages > 1000 ? "Over 1000 pages" : "Less than 1000 pages";
+// pagesRange;
 
-function getYear(str) {
-  return str.split("-")[0];
-}
-console.log(getYear(publicationDate));
+// function getYear(str) {
+//   return str.split("-")[0];
+// }
+// console.log(getYear(publicationDate));
+// console.log(true && "somestring");
+// console.log(false && "somestring");
+// console.log(hasMovieAdaptation && "this book has been adapted into a movie");
+
+// //false , null, undefined, 0, NaN, "", -0
+
+// console.log("phu" && "somestring");
+// console.log(0 && "somestring");
+
+// console.log(true || "somestring");
+// console.log(false || "somestring");
+
+// // console.log(book.translations.spanish || "No translation available");
+
+// // const spanishTranslation =
+// //   book.translations.spanish || "No translation available";
+
+// // console.log(book.reviews.librarything.reviewsCount);
+
+// // const countWrong = book.reviews.librarything.reviewsCount || "No data";
+
+// // const count = book.reviews.librarything.reviewsCount ?? "No data";
+
+// // console.log(count);
+// // console.log(countWrong);
+
+// function getTotalReviewCount(book) {
+//   const goodRead = book.reviews?.goodreads?.reviewsCount;
+//   const libraryThing = book.reviews?.librarything?.reviewsCount ?? 0;
+//   libraryThing;
+//   return goodRead + libraryThing;
+// }
+
+// console.log(getTotalReviewCount(book));
+
+const book = getBook(2);
+const x = [12, 23, 34].map((el) => el * 2);
+console.log(x);
+
+const titles = data.map((book) => book.title);
+titles;
+
+const essentialData = data.map((book) => {
+  return {
+    title: book.title,
+    author: book.author,
+    publicationDate: book.publicationDate,
+    genres: book.genres,
+  };
+});
+console.log(essentialData);
+
+const longBooks = data
+  .filter((book) => book.pages > 1000)
+  .filter((book) => book.hasMovieAdaptation);
+console.log(longBooks);
+
+const adventureBooks = data
+  .filter((book) => book.genres.includes("adventure"))
+  .map((book) => book.title);
+console.log(adventureBooks);
+
+const pagesAllBooks = data.reduce((acc, book) => acc + book.pages, 0);
+console.log(pagesAllBooks);
+
+const arr = [1, 7, 5, 4, 7];
+const sorted = arr.sort((a, b) => a - b);
+sorted;
+
+const arr1 = [1, 7, 5, 4, 7];
+const sorted1 = arr1.slice().sort((a, b) => b.pages - a.pages);
+sorted1;
